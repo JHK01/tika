@@ -11,6 +11,7 @@ Dépôt : https://github.com/JHK01/tika/tree/tache3
 | .github/workflows/tache3-semgrep.yml | Détection différentielle des alertes |
 | .github/workflows/tache3-tests.yml | Exécution des tests Maven |
 | .github/actions/rickroll/action.yml | Action composite humoristique |
+| tika-core/src/test/java/org/apache/tika/RickrollDemoTest.java | Test JUnit de démonstration |
 
 Le module choisi est tika-core.
 
@@ -40,7 +41,7 @@ Les expériences ne sont pas encore implémentées. Aucun résultat de détectio
 
 Le workflow de tests lance Maven sur tika-core et ses dépendances. L'action composite affiche un message et un lien vers la vidéo dans le résumé GitHub Actions uniquement lorsque l'étape Maven échoue. Elle ne neutralise pas l'échec du test.
 
-La validation doit vérifier un passage normal et un échec contrôlé. Les exécutions ne sont pas encore confirmées.
+Le test RickrollDemoTest est désactivé sauf lorsque TIKA_RICKROLL_DEMO vaut true. Dans Actions, sélectionner Tache 3 - Tests, Run workflow, la branche tache3 et activer force_failure pour demander un échec volontaire. Sans cette option, le test de démonstration est ignoré. Le résultat attendu est un job rouge avec le lien Rickroll dans le résumé lors de l'échec contrôlé. Les exécutions ne sont pas encore confirmées.
 
 ## 5. Liens de validation
 

@@ -41,9 +41,11 @@ Les sept scénarios et leurs protections sont détaillés dans [le dossier des e
 
 Le workflow de tests lance Maven sur tika-core et ses dépendances. L'action composite affiche un message et un lien vers la vidéo dans le résumé GitHub Actions uniquement lorsque l'étape Maven échoue. Elle ne neutralise pas l'échec du test.
 
-Le test RickrollDemoTest est désactivé sauf lorsque TIKA_RICKROLL_DEMO vaut true. Dans Actions, sélectionner Tache 3 - Tests, Run workflow, la branche tache3 et activer force_failure pour demander un échec volontaire. Sans cette option, le test de démonstration est ignoré. Le résultat attendu est un job rouge avec le lien Rickroll dans le résumé lors de l'échec contrôlé. Les exécutions ne sont pas encore confirmées.
+Le test RickrollDemoTest est désactivé sauf lorsque TIKA_RICKROLL_DEMO vaut true. Dans Actions, sélectionner Tache 3 - Tests, Run workflow, la branche tache3 et activer force_failure pour demander un échec volontaire. Sans cette option, le test de démonstration est ignoré. Le résultat attendu est un job rouge avec le lien Rickroll dans le résumé lors de l'échec contrôlé. Le déclenchement du Rickroll est confirmé lors de [l'exécution Tests #10](https://github.com/JHK01/tika/actions/runs/44240383447), après un échec Checkstyle. Après correction de la licence et des imports du test (commit e120356), les exécutions Tests #11 et Semgrep #12 sont vertes (47 s et 43 s, respectivement, selon les captures GitHub Actions). L'échec volontaire via force_failure reste à vérifier.
 
 ## 5. Liens de validation
+
+Le succès de Semgrep #12 confirme le passage du contrôle sur le commit e120356, mais ne démontre pas encore la détection de sept nouvelles vulnérabilités.
 
 - [Semgrep](https://github.com/JHK01/tika/actions/workflows/tache3-semgrep.yml)
 - [Tests](https://github.com/JHK01/tika/actions/workflows/tache3-tests.yml)

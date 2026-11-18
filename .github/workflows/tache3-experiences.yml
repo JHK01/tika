@@ -1,0 +1,30 @@
+name: Tache 3 - Experiences
+on:
+  push:
+    branches: [tache3]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  markers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install semgrep==1.182.1
+      - name: Comparer les marqueurs
+        run: |
+          mkdir -p /tmp/tika-demo-before
+          echo 'class SecurityMarkers {}' > /tmp/tika-demo-before/SecurityMarkers.java
+          semgrep scan --config tache3/experiences/marker-rules.yml --json --output before.json /tmp/tika-demo-before
+          semgrep scan --config tache3/experiences/marker-rules.yml --json --output after.json tache3/experiences/fixtures
+          python -c 'import json; a=json.load(open("before.json"))["results"]; b=json.load(open("after.json"))["results"]; assert len(a)==0 and len(b)==7; print("0 avant, 7 marqueurs après")'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: marker-reports
+          path: |
+            before.json
+            after.json

@@ -1,0 +1,36 @@
+rules:
+  - id: demo-cwe-328
+    languages: [java]
+    severity: WARNING
+    message: Marqueur pédagogique CWE-328, pas une vulnérabilité réelle
+    pattern: '"DEMO_CWE_328"'
+  - id: demo-cwe-327
+    languages: [java]
+    severity: WARNING
+    message: Marqueur pédagogique CWE-327, pas une vulnérabilité réelle
+    pattern: '"DEMO_CWE_327"'
+  - id: demo-cwe-295
+    languages: [java]
+    severity: WARNING
+    message: Marqueur pédagogique CWE-295, pas une vulnérabilité réelle
+    pattern: '"DEMO_CWE_295"'
+  - id: demo-cwe-330
+    languages: [java]
+    severity: WARNING
+    message: Marqueur pédagogique CWE-330, pas une vulnérabilité réelle
+    pattern: '"DEMO_CWE_330"'
+  - id: demo-cwe-732
+    languages: [java]
+    severity: WARNING
+    message: Marqueur pédagogique CWE-732, pas une vulnérabilité réelle
+    pattern: '"DEMO_CWE_732"'
+  - id: demo-cwe-502
+    languages: [java]
+    severity: WARNING
+    message: Marqueur pédagogique CWE-502, pas une vulnérabilité réelle
+    pattern: '"DEMO_CWE_502"'
+  - id: demo-cwe-611
+    languages: [java]
+    severity: WARNING
+    message: Marqueur pédagogique CWE-611, pas une vulnérabilité réelle
+    pattern: '"DEMO_CWE_611"'

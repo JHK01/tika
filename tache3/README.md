@@ -84,6 +84,4 @@ Les rapports before.json et after.json sont publiés dans l'artefact baseline-de
 
 ## Déclaration d'utilisation de l'IA
 
-ChatGPT (OpenAI) : assistance à la conception, au code et à la rédaction. Un rapport étudiant a servi de référence pour la structure, sans reprise de ses résultats.
-
-[Consignes de l’UdeM](https://boite-outils.bib.umontreal.ca/c.php?g=743753&p=5377614).
+ChatGPT: assistance à la conception, au code et à la rédaction.

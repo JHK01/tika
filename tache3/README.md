@@ -15,4 +15,4 @@ Comparer une analyse initiale et une analyse après modification, vérifier le s
 Les sept expériences, les rapports Semgrep et la validation du workflow ne sont pas encore réalisés. Aucun résultat expérimental n’est revendiqué dans cette version.
 
 ## Utilisation de l’intelligence artificielle
-ChatGPT (OpenAI) a été utilisé pour proposer la conception et rédiger cette documentation initiale. Les résultats et les modifications doivent être vérifiés avant la remise. Voir les [consignes de l’Université de Montréal](https://boite-outils.bib.umontreal.ca/c.php?g=743753&p=5377614).
+ChatGPT (OpenAI) a été utilisé pour proposer la conception et rédiger cette documentation initiale. 

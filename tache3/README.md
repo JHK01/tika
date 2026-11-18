@@ -70,6 +70,18 @@ L'[exécution Audit Java #1](https://github.com/JHK01/tika/actions/runs/44242499
 
 Total : 3 alertes statiques observées, sans confirmation de leur exploitabilité. Le rapport est disponible dans l'artefact audit-java. Ce résultat constitue une mesure de référence sur cette révision, et non une comparaison avant/après de sept nouvelles vulnérabilités.
 
+## Validation du blocage différentiel
+
+L'[exécution Validation baseline #1](https://github.com/JHK01/tika/actions/runs/44242964509), commit 7e7027b, a réussi en 26 secondes. Dans un dépôt Git temporaire isolé, une règle locale détecte un marqueur inoffensif.
+
+| Mesure | Résultat observé |
+|---|---:|
+| Alertes avant | 0 |
+| Alertes différentielles après | 1 |
+| Code de sortie Semgrep avec --error | 1 |
+
+Les rapports before.json et after.json sont publiés dans l'artefact baseline-demo-reports. Le workflow de démonstration réussit car il vérifie explicitement le code de sortie 1 attendu. Cela valide le mécanisme différentiel sur une règle locale, mais ne prouve pas la détection de sept nouvelles vulnérabilités par p/java.
+
 ## Déclaration d'utilisation de l'IA
 
 ChatGPT (OpenAI) : assistance à la conception, au code et à la rédaction. Un rapport étudiant a servi de référence pour la structure, sans reprise de ses résultats.

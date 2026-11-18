@@ -1,0 +1,42 @@
+name: Tache 3 - Semgrep
+on:
+  push:
+    branches: [main, tache3]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install semgrep==1.182.1
+      - name: Choisir la référence
+        env:
+          BEFORE: ${{ github.event.before }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [ -n "$PR_BASE" ]; then
+            base=$(git merge-base HEAD "$PR_BASE")
+          elif [ -n "$BEFORE" ] && git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            base="$BEFORE"
+          else
+            base=$(git merge-base HEAD origin/main)
+          fi
+          echo "BASE=$base" >> "$GITHUB_ENV"
+      - name: Rapport complet
+        run: semgrep scan --config p/java --metrics=off --json --output semgrep-complet.json tika-core
+      - name: Nouvelles alertes
+        run: semgrep scan --config p/java --metrics=off --baseline-commit "$BASE" --error --json --output semgrep-nouvelles.json tika-core
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: semgrep-reports
+          path: semgrep-*.json

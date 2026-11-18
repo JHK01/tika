@@ -1,0 +1,61 @@
+name: Tache 3 - Validation baseline
+on:
+  push:
+    branches: [tache3]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install semgrep==1.182.1
+      - name: Comparaison isolee
+        shell: bash
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/baseline-demo" "$RUNNER_TEMP/reports"
+          cd "$RUNNER_TEMP/baseline-demo"
+          git init -q
+          git config user.email demo@example.invalid
+          git config user.name Demo
+          cat > rules.yml <<'EOF'
+          rules:
+            - id: pedagogical-marker
+              languages: [java]
+              message: Marqueur inoffensif
+              severity: ERROR
+              pattern: '"DEMO_BASELINE"'
+          EOF
+          echo 'class Demo { String value = "SAFE"; }' > Demo.java
+          git add .
+          git commit -qm initial
+          BASE=$(git rev-parse HEAD)
+          semgrep scan --config rules.yml --metrics=off --error --json --output "$RUNNER_TEMP/reports/before.json" Demo.java
+          echo 'class Demo { String value = "DEMO_BASELINE"; }' > Demo.java
+          git add Demo.java
+          git commit -qm marker
+          set +e
+          semgrep scan --config rules.yml --metrics=off --baseline-commit "$BASE" --error --json --output "$RUNNER_TEMP/reports/after.json" Demo.java
+          status=$?
+          set -e
+          export STATUS="$status"
+          python - <<'PY'
+          import json, os, pathlib
+          p = pathlib.Path(os.environ["RUNNER_TEMP"]) / "reports"
+          before = len(json.loads((p / "before.json").read_text())["results"])
+          after = len(json.loads((p / "after.json").read_text())["results"])
+          status = int(os.environ["STATUS"])
+          assert (before, after, status) == (0, 1, 1), (before, after, status)
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+              f.write(f"## Validation differentielle\nAvant : {before}\n\nApres : {after}\n\nCode de sortie Semgrep : {status}\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: baseline-demo-reports
+          path: ${{ runner.temp }}/reports/

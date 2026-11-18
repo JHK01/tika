@@ -31,10 +31,28 @@ jobs:
             base=$(git merge-base HEAD origin/main)
           fi
           echo "BASE=$base" >> "$GITHUB_ENV"
+      - name: Rapport de référence
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/tika-baseline" "$BASE"
+          semgrep scan --config p/java --metrics=off --json --output "$GITHUB_WORKSPACE/semgrep-avant.json" "$RUNNER_TEMP/tika-baseline/tika-core"
       - name: Rapport complet
         run: semgrep scan --config p/java --metrics=off --json --output semgrep-complet.json tika-core
       - name: Nouvelles alertes
         run: semgrep scan --config p/java --metrics=off --baseline-commit "$BASE" --error --json --output semgrep-nouvelles.json tika-core
+      - name: Résumé des résultats
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
+              summary.write("## Comparaison Semgrep\n\n")
+              summary.write("| Rapport | Alertes |\n|---|---:|\n")
+              for name in ("avant", "complet", "nouvelles"):
+                  p = Path(f"semgrep-{name}.json")
+                  count = len(json.loads(p.read_text()).get("results", [])) if p.exists() else "Indisponible"
+                  summary.write(f"| {name} | {count} |\n")
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:

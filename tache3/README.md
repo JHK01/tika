@@ -50,6 +50,14 @@ Le succès de Semgrep #12 confirme le passage du contrôle sur le commit e120356
 - [Semgrep](https://github.com/JHK01/tika/actions/workflows/tache3-semgrep.yml)
 - [Tests](https://github.com/JHK01/tika/actions/workflows/tache3-tests.yml)
 
+## Expérience complémentaire : contrôle des sept marqueurs
+
+Le [workflow expérimental](https://github.com/JHK01/tika/actions/workflows/tache3-experiences.yml) utilise sept [règles locales](experiences/marker-rules.yml) et un [fichier Java isolé](experiences/fixtures/SecurityMarkers.java). Chaque règle correspond à un identifiant CWE distinct, mais détecte uniquement une chaîne de caractères inoffensive.
+
+Le scénario initial contient une classe vide ; le scénario final contient sept marqueurs. Une assertion Python vérifie que les rapports contiennent respectivement zéro et sept résultats. Les deux rapports JSON sont publiés dans l'artefact marker-reports.
+
+Cette expérience vérifie le comptage des résultats et la génération des rapports. Elle ne démontre ni sept vulnérabilités réelles ni leur détection par le pack officiel Java, et ne remplace pas la validation du mode baseline sur du code vulnérable. Les résultats attendus restent à confirmer dans GitHub Actions.
+
 ## Déclaration d'utilisation de l'IA
 
 ChatGPT (OpenAI) : assistance à la conception, au code et à la rédaction. Un rapport étudiant a servi de référence pour la structure, sans reprise de ses résultats.

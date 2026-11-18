@@ -1,0 +1,34 @@
+name: Tache 3 - Audit Java
+on:
+  push:
+    branches: [tache3]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install semgrep==1.182.1
+      - name: Audit officiel
+        run: semgrep scan --config p/java --metrics=off --json --output audit-java.json tika-core
+      - name: Synthese par regle
+        run: |
+          python - <<'PY'
+          import json, collections, os
+          results = json.load(open("audit-java.json"))["results"]
+          counts = collections.Counter(r["check_id"] for r in results)
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+              f.write("## Alertes existantes dans tika-core\n\n")
+              for rule, count in sorted(counts.items()):
+                  f.write(f"- {rule}: {count}\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: audit-java
+          path: audit-java.json

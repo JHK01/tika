@@ -29,7 +29,7 @@ Pour valider le contrôle, comparer une révision initiale avec une révision ex
 
 Les sept catégories à étudier sont le hachage faible, le chiffrement non recommandé, la validation de certificat, l'aléatoire non cryptographique, les permissions excessives, la désérialisation et la configuration XML.
 
-Les expériences ne sont pas encore implémentées. Aucun résultat de détection, fichier modifié ou nombre d'alertes n'est revendiqué.
+Les sept scénarios et leurs protections sont détaillés dans [le dossier des expériences](experiences/README.md). Les expériences de détection ne sont pas encore implémentées. Aucun résultat de détection, fichier modifié ou nombre d'alertes n'est revendiqué.
 
 | Mesure | Résultat |
 |---|---|

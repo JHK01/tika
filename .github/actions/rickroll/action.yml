@@ -1,0 +1,10 @@
+name: Rickroll
+description: Message humoristique après un test échoué
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        echo 'RICKROLLED!'
+        echo 'https://youtu.be/dQw4w9WgXcQ'
+        echo '[Voir le diagnostic](https://youtu.be/dQw4w9WgXcQ)' >> "$GITHUB_STEP_SUMMARY"

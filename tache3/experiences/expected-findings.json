@@ -1,0 +1,51 @@
+[
+  {
+    "cwe": "328",
+    "category": "Hachage faible",
+    "rule": "use-of-md5",
+    "expected": "finding",
+    "observed": null
+  },
+  {
+    "cwe": "327",
+    "category": "Chiffrement ECB",
+    "rule": "use-of-aes-ecb",
+    "expected": "finding",
+    "observed": null
+  },
+  {
+    "cwe": "295",
+    "category": "Validation TLS",
+    "rule": "insecure-trust-manager",
+    "expected": "finding",
+    "observed": null
+  },
+  {
+    "cwe": "330",
+    "category": "Aléatoire faible",
+    "rule": "weak-random",
+    "expected": "finding",
+    "observed": null
+  },
+  {
+    "cwe": "732",
+    "category": "Permissions excessives",
+    "rule": "overly-permissive-file-permission",
+    "expected": "finding",
+    "observed": null
+  },
+  {
+    "cwe": "502",
+    "category": "Désérialisation",
+    "rule": "object-deserialization",
+    "expected": "finding",
+    "observed": null
+  },
+  {
+    "cwe": "611",
+    "category": "Configuration XML",
+    "rule": "documentbuilderfactory-disallow-doctype-decl-missing",
+    "expected": "finding",
+    "observed": null
+  }
+]

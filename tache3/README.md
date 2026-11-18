@@ -47,8 +47,8 @@ La validation doit vérifier un passage normal et un échec contrôlé. Les exé
 - [Semgrep](https://github.com/JHK01/tika/actions/workflows/tache3-semgrep.yml)
 - [Tests](https://github.com/JHK01/tika/actions/workflows/tache3-tests.yml)
 
-## 6. Utilisation de l'IA
+## Déclaration d'utilisation de l'IA
 
-ChatGPT (OpenAI) a aidé à concevoir les workflows, écrire l'action composite et structurer la documentation. Un README d'autres étudiants fourni comme exemple a inspiré l'organisation du rapport ; leurs résultats ne sont pas repris. Les modifications et les résultats doivent être vérifiés avant remise.
+ChatGPT (OpenAI) : assistance à la conception, au code et à la rédaction. Un rapport étudiant a servi de référence pour la structure, sans reprise de ses résultats.
 
-[Consignes de déclaration de l'UdeM](https://boite-outils.bib.umontreal.ca/c.php?g=743753&p=5377614).
+[Consignes de l’UdeM](https://boite-outils.bib.umontreal.ca/c.php?g=743753&p=5377614).

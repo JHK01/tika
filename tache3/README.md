@@ -58,6 +58,18 @@ Le scénario initial contient une classe vide ; le scénario final contient sept
 
 Cette expérience vérifie le comptage des résultats et la génération des rapports. Elle ne démontre ni sept vulnérabilités réelles ni leur détection par le pack officiel Java, et ne remplace pas la validation du mode baseline sur du code vulnérable. Les exécutions Experiences #1 (commit 17d1917, 58 s) et #2 (commit 9926a26, 39 s) sont réussies selon les résultats GitHub Actions observés. L'assertion du workflow impose 0 résultat avant et 7 après ; le succès confirme ces valeurs pour les marqueurs pédagogiques. Les rapports sont accessibles dans les artefacts des exécutions. Les marqueurs ne constituent pas des vulnérabilités réelles.
 
+## Audit complémentaire avec les règles Java officielles
+
+L'[exécution Audit Java #1](https://github.com/JHK01/tika/actions/runs/44242499547) (commit a509e53) a réussi en 34 secondes. Le scan en lecture seule de tika-core avec p/java a produit un artefact JSON et trois alertes existantes :
+
+| Règle | Nombre | Risque et correction à examiner |
+|---|---:|---|
+| java.lang.security.audit.crypto.unencrypted-socket.unencrypted-socket | 1 | Transmission non chiffrée ; privilégier TLS lorsque nécessaire. |
+| java.lang.security.audit.xxe.saxparserfactory-disallow-doctype-decl-missing.saxparserfactory-disallow-doctype-decl-missing | 1 | Risque XXE ; vérifier la désactivation des DTD. |
+| java.lang.security.xmlinputfactory-possible-xxe.xmlinputfactory-possible-xxe | 1 | Risque XXE ; vérifier la désactivation des entités externes et des DTD. |
+
+Total : 3 alertes statiques observées, sans confirmation de leur exploitabilité. Le rapport est disponible dans l'artefact audit-java. Ce résultat constitue une mesure de référence sur cette révision, et non une comparaison avant/après de sept nouvelles vulnérabilités.
+
 ## Déclaration d'utilisation de l'IA
 
 ChatGPT (OpenAI) : assistance à la conception, au code et à la rédaction. Un rapport étudiant a servi de référence pour la structure, sans reprise de ses résultats.

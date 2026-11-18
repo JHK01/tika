@@ -4,6 +4,11 @@ on:
     branches: [tache3]
   pull_request:
   workflow_dispatch:
+    inputs:
+      force_failure:
+        description: 'Activer le test de démonstration'
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -18,6 +23,8 @@ jobs:
           cache: maven
       - name: Tests Maven
         id: tests
+        env:
+          TIKA_RICKROLL_DEMO: ${{ inputs.force_failure || false }}
         run: mvn -B -pl tika-core -am test
       - name: Rickroll
         if: failure() && steps.tests.outcome == 'failure'

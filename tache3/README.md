@@ -56,7 +56,7 @@ Le [workflow expérimental](https://github.com/JHK01/tika/actions/workflows/tach
 
 Le scénario initial contient une classe vide ; le scénario final contient sept marqueurs. Une assertion Python vérifie que les rapports contiennent respectivement zéro et sept résultats. Les deux rapports JSON sont publiés dans l'artefact marker-reports.
 
-Cette expérience vérifie le comptage des résultats et la génération des rapports. Elle ne démontre ni sept vulnérabilités réelles ni leur détection par le pack officiel Java, et ne remplace pas la validation du mode baseline sur du code vulnérable. Les résultats attendus restent à confirmer dans GitHub Actions.
+Cette expérience vérifie le comptage des résultats et la génération des rapports. Elle ne démontre ni sept vulnérabilités réelles ni leur détection par le pack officiel Java, et ne remplace pas la validation du mode baseline sur du code vulnérable. Les exécutions Experiences #1 (commit 17d1917, 58 s) et #2 (commit 9926a26, 39 s) sont réussies selon les résultats GitHub Actions observés. L'assertion du workflow impose 0 résultat avant et 7 après ; le succès confirme ces valeurs pour les marqueurs pédagogiques. Les rapports sont accessibles dans les artefacts des exécutions. Les marqueurs ne constituent pas des vulnérabilités réelles.
 
 ## Déclaration d'utilisation de l'IA
 
